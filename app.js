@@ -1,3 +1,8 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+// package.json is a configuartion for npm
+
 // const heading = React.createElement(
 //   "h1",
 //   {
