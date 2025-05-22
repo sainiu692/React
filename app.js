@@ -1,35 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// package.json is a configuartion for npm
+/*
+ *Header
+ *   -logo
+ *   -nav items
+ *Body
+ *   -search
+ *   -Restaurant container
+ *      -restaurant card
+ *Footer
+ *   -copyright
+ *   -links
+ *   -address
+ */
 
-// const heading = React.createElement(
-//   "h1",
-//   {
-//     id: "heading",
-//   },
-//   "Hello World From React!" 
-// );
+ const Header=()=>{
+return(
+    <div className="header">
+        <div className="logo-container">
+            <img className="logo-container"
+            src="https://images.app.goo.gl/Rgf6W7rKuXciGDPr6"
+            />
+        </div>
+        <div className="nav-items">
+       <ul>
+        
+       </ul>
+        </div>
+    </div>
+)
+ }
 
-//ReactElement(object)=>HTML(browser understands)
 
-// console.log(heading) //object
 
-const parent=React.createElement("div",{id:"parent"},
-    [React.createElement("div",{id:"child"},
-        [React.createElement("h1",{},"Im in h1 tag"),
-        React.createElement("h2",{},"Im in h2 tag")
-        ]
-    ),
-    React.createElement("div",{id:"child2"}, 
-        [React.createElement("h1",{},"Im in h1 tag"),
-        React.createElement("h2",{},"Im in h2 tag")
-        ]
-    )]
-  )
-  console.log(parent)
-  
-  const root = ReactDOM.createRoot(document.getElementById("root"));
-  
-  root.render(parent);
-  
+
+
+const AppLayout = () => {
+    return(
+        <div className="app">
+
+        </div>
+    )
+};
