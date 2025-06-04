@@ -1,0 +1,31 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "learning react",
+  "scripts": {
+    "start":"parcel index.html",
+    "build":"parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sainiu692/React.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "ujjwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sainiu692/React/issues"
+  },
+  "homepage": "https://github.com/sainiu692/React#readme",
+  "devDependencies": {
+    "parcel": "^2.15.2"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "browserslist":["last 2 versions"]
+}
