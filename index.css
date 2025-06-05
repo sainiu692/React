@@ -162,26 +162,56 @@ body {
 
 
 /* Search */
+
+
 .search-container {
-  padding: 20px 32px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 700px;
+  transition: all 0.3s ease-in-out;
 }
 
 .search {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
   width: 100%;
   max-width: 400px;
-  padding: 10px 16px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  transition: box-shadow 0.2s ease;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
 }
 
 .search:focus {
-  box-shadow: 0 0 0 3px rgba(0, 128, 255, 0.2);
-  border-color: #007bff;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
 }
+
+.search-btn {
+  background: linear-gradient(135deg, #007bff, #339af0);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(147, 51, 234, 0.3);
+}
+
 
 /* Restaurant Cards */
 .res-container {
@@ -295,6 +325,7 @@ body {
 }
 
 .shimmer-card {
+  margin: 10px;
   background-color: #fff;
   width: 250px;
   border-radius: 12px;

@@ -6,8 +6,11 @@ import Shimmer from "./Shimmer";
 const Body = () => {
   // * State variable - Super Powerful variable
 
+  const [searchText, setSearchText] = useState("");
+
   // const [listOfRestaurants, setListOfRestaurants] = useState(resList);
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   // * Normal JS variable
   // const listOfRestaurants = [
@@ -58,11 +61,14 @@ const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.9680035&lng=77.55520659999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    console.log(data);
+
     const json = await data.json();
     console.log(json);
     // optional chaining
     setListOfRestaurants(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
@@ -83,7 +89,27 @@ const Body = () => {
           className="search"
           type="text"
           placeholder="Search restaurants..."
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            // console.log(e); // Full event object
+            // console.log(e.target); // The <input> element
+            // console.log(e.target.value); // The actual string the user typed
+          }}
         />
+
+        <button className="search-btn"
+          onClick={() => {
+            // filter the restaurant card and update the UI
+            console.log(searchText);
+            const filtered = listOfRestaurants.filter((res) =>
+              res.info.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredRestaurants(filtered);
+          }}
+        >
+          search
+        </button>
       </div>
 
       <div className="filter">
@@ -91,11 +117,11 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             // filter-logic
-            const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 2.6
+            const topRated = filteredRestaurants.filter(
+              (res) => res.info.avgRating > 4.5
             );
-            setListOfRestaurants(filteredList);
-            console.log(filteredList);
+            setFilteredRestaurants(topRated);
+            console.log(topRated);
           }}
         >
           Top Rated Restaurants
@@ -112,9 +138,13 @@ const Body = () => {
         <RestaurantCard resData={resList[6]} />
         <RestaurantCard resData={resList[7]} /> */}
 
-        {listOfRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
-        ))}
+        {filteredRestaurants.length === 0 ? (
+          <h2>No restaurants found.</h2>
+        ) : (
+          filteredRestaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          ))
+        )}
 
         {/* <RestaurantCard resName="KFC" cuisine="chicken, NorthIndian,Asian" />
         <RestaurantCard resName="Dominos" cuisine="pizza, NorthIndian,Asian" />
