@@ -1,11 +1,13 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   // * State variable - Super Powerful variable
 
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  // const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   // * Normal JS variable
   // const listOfRestaurants = [
@@ -52,48 +54,29 @@ const Body = () => {
     fetchData();
   }, []);
 
-  // const fetchData = async () => {
-  //   const data = await fetch(
-  //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.9680035&lng=77.55520659999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-  //   );
-  //   console.log(data);
-  //   const json = await data.json();
-  //   console.log(
-  //     json
-  //   );
-  //   setListOfRestaurants(
-  //     json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-  //   );
-  // };
-
-
-
   const fetchData = async () => {
-  try {
     const data = await fetch(
-      "https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=29.9680035&lng=77.55520659999999&carousel=true&third_party_vendor=1",
-      {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          // ❗ You CANNOT set 'User-Agent' or 'Referer' from the browser
-        },
-      }
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.9680035&lng=77.55520659999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
+    console.log(data);
     const json = await data.json();
     console.log(json);
+    // optional chaining
     setListOfRestaurants(
       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
+  };
 
   console.log("body rendered");
 
-  return (
+  //conditional rendering
+  // if(listOfRestaurants.length===0){
+  //  return <Shimmer/>
+  // }
+
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="search-container">
         <input
@@ -109,7 +92,7 @@ const Body = () => {
           onClick={() => {
             // filter-logic
             const filteredList = listOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.5
+              (res) => res.info.avgRating > 2.6
             );
             setListOfRestaurants(filteredList);
             console.log(filteredList);
