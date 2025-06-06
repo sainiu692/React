@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   // * State variable - Super Powerful variable
@@ -59,18 +60,26 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=29.9680035&lng=77.55520659999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5355161&lng=77.3910265&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     // optional chaining
-    setListOfRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurants(
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+
+    // setListOfRestaurants(
+    //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+    // setFilteredRestaurants(
+    //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+
+    const restaurants = json?.data?.cards?.find(
+      (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+    setListOfRestaurants(restaurants || []);
+    setFilteredRestaurants(restaurants || []);
   };
 
   console.log("body rendered");
@@ -98,7 +107,8 @@ const Body = () => {
           }}
         />
 
-        <button className="search-btn"
+        <button
+          className="search-btn"
           onClick={() => {
             // filter the restaurant card and update the UI
             console.log(searchText);
@@ -118,7 +128,7 @@ const Body = () => {
           onClick={() => {
             // filter-logic
             const topRated = filteredRestaurants.filter(
-              (res) => res.info.avgRating > 4.5
+              (res) => res.info.avgRating > 4.2
             );
             setFilteredRestaurants(topRated);
             console.log(topRated);
@@ -142,7 +152,12 @@ const Body = () => {
           <h2>No restaurants found.</h2>
         ) : (
           filteredRestaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+            <Link
+              key={restaurant.info?.id}
+              to={`/restaurants/${restaurant.info?.id}`}
+            >
+              <RestaurantCard resData={restaurant} />
+            </Link>
           ))
         )}
 
