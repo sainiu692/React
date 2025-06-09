@@ -82,7 +82,7 @@ const Body = () => {
     setFilteredRestaurants(restaurants || []);
   };
 
-  console.log("body rendered");
+  // console.log("body rendered");
 
   //conditional rendering
   // if(listOfRestaurants.length===0){
@@ -128,10 +128,10 @@ const Body = () => {
           onClick={() => {
             // filter-logic
             const topRated = filteredRestaurants.filter(
-              (res) => res.info.avgRating > 4.2
+              (res) => res.info.avgRating > 4.5
             );
             setFilteredRestaurants(topRated);
-            console.log(topRated);
+            // console.log(topRated);
           }}
         >
           Top Rated Restaurants
@@ -172,6 +172,6 @@ const Body = () => {
   // so this line of code will never execute
 };
 
-console.log("body rendered3");
+// console.log("body rendered3");
 
 export default Body;
