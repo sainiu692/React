@@ -55,7 +55,7 @@ const RestaurantsMenu = () => {
     <div className="menu">
       <header className="menu-header">
         <div className="menu-header-left">
-          <img src={CDN_URL + cloudinaryImageId} alt="Restaurent Info" />
+          <img src={CDN_URL + cloudinaryImageId} alt="Restaurant Info" />
         </div>
         <div className="menu-header-right">
           <div className="top">

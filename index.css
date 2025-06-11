@@ -340,24 +340,7 @@ body {
   height: 14px;
 }
 
-.shimmer-card {
-  /* width: 200px;
-  height: 400px;
-  margin: 20px;
-  border-radius: 11px;
-   */
 
-  width: 200px;
-  height: 450px;
-  background-color: #efefef;
-  /* height: 300px; */
-  /* padding: 5px; */
-  /* padding-bottom: 20px; */
-  /* border: 1px solid transparent; */
-
-  border-radius: 11px;
-  cursor: pointer;
-}
 
 .shimmer-menu,
 .shimmer-menu-main {
