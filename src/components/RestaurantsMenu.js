@@ -10,10 +10,11 @@ import { AiOutlineStar } from "react-icons/ai";
 
 const RestaurantsMenu = () => {
   const { resId } = useParams();
-  const resInfo = useRestaurantMenu(resId);
+  const { restaurantInfo, itemCards } = useRestaurantMenu(resId);
 
-  if (resInfo === null) return;
-  <Shimmer />;
+  if (!restaurantInfo) return <ShimmerMenu/>;
+  // if (restaurantInfo === null) return;
+  // <Shimmer />;
 
   //   const { cuisines,name, costForTwoMessage } =
   //     resInfo?.cards[2]?.card?.card?.info;
@@ -24,10 +25,9 @@ const RestaurantsMenu = () => {
   // It’s safer because it doesn’t rely on a fixed index.
   //  Even if the position changes, it still finds the right card
 
-  const info = resInfo?.cards?.find((card) => card?.card?.card?.info)?.card
-    ?.card?.info;
+  
 
-  if (!info) return <h2>Restaurant info not found</h2>;
+  // if (!restaurantInfo) return <h2>Restaurant info not found</h2>;
 
   const {
     name,
@@ -36,20 +36,11 @@ const RestaurantsMenu = () => {
     cloudinaryImageId,
     avgRating,
     deliveryTime,
-  } = info;
+  } = restaurantInfo;
 
-  //   const { itemCards } =
-  //     resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+  
 
-  const regularCards = resInfo?.cards?.find(
-    (card) => card?.groupedCard?.cardGroupMap?.REGULAR
-  )?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-
-  const itemCardContainer = regularCards?.find((c) => c?.card?.card?.itemCards);
-
-  const itemCards = itemCardContainer?.card?.card?.itemCards;
-
-  console.log(itemCards);
+  
 
   return (
     <div className="menu">

@@ -3,6 +3,7 @@ import resList from "../utils/mockData";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // * State variable - Super Powerful variable
@@ -55,7 +56,7 @@ const Body = () => {
 
   useEffect(() => {
     // console.log("useEffect called");
-     fetchData();
+    fetchData();
   }, []);
 
   const fetchData = async () => {
@@ -64,15 +65,6 @@ const Body = () => {
     );
 
     const json = await data.json();
-    // console.log(json);
-    // optional chaining
-
-    // setListOfRestaurants(
-    //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    // );
-    // setFilteredRestaurants(
-    //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    // );
 
     const restaurants = json?.data?.cards?.find(
       (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -82,12 +74,16 @@ const Body = () => {
     setFilteredRestaurants(restaurants || []);
   };
 
-  // console.log("body rendered");
+  const onlineStatus = useOnlineStatus();
 
-  //conditional rendering
-  // if(listOfRestaurants.length===0){
-  //  return <Shimmer/>
-  // }
+  if (!onlineStatus) {
+    return (
+      <h1 style={{ textAlign: "center", marginTop: "50px", color: "black" }}>
+        Looks like you're offline! Please check your internet connection.
+      </h1>
+    );
+  }
+
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -175,3 +171,4 @@ const Body = () => {
 // console.log("body rendered3");
 
 export default Body;
+
