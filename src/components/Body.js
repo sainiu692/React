@@ -54,6 +54,8 @@ const Body = () => {
   //   },
   // ];
 
+  console.log("listOfRestaurants", listOfRestaurants);
+
   useEffect(() => {
     // console.log("useEffect called");
     fetchData();
@@ -61,7 +63,7 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5355161&lng=77.3910265&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
@@ -83,7 +85,6 @@ const Body = () => {
       </h1>
     );
   }
-
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -171,4 +172,3 @@ const Body = () => {
 // console.log("body rendered3");
 
 export default Body;
-
